@@ -1,0 +1,1328 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Переезд на ФБС — разбор эфира 27 августа 2026</title>
+<meta name="description" content="Конспект эфира по переходу на ФБС на Ozon и Wildberries: цифры по выкупаемости и срокам доставки, работа с честным знаком, проблемы фулфилментов, стратегия размещения складов.">
+<style>
+:root{
+  --bg:#faf9f7; --surface:#ffffff; --surface-2:#f3f1ed;
+  --line:#e3ded6; --line-strong:#cdc6ba;
+  --ink:#1b1a18; --ink-2:#3d3a35; --muted:#6f6862;
+  --accent:#12545c; --accent-2:#1b7a85; --accent-soft:#e4f0f1;
+  --warn:#9a5b06; --warn-soft:#fbf1e0; --warn-line:#e8cf9f;
+  --bad:#9b2f26; --bad-soft:#fbeae8; --bad-line:#eec4be;
+  --good:#2c6b3f; --good-soft:#e8f2e9; --good-line:#c0dbc6;
+  --radius:14px;
+  --maxw:1080px;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#131312; --surface:#1c1b1a; --surface-2:#232221;
+    --line:#332f2c; --line-strong:#494440;
+    --ink:#f0ece6; --ink-2:#d5cfc7; --muted:#9a938b;
+    --accent:#5fd3de; --accent-2:#8ee3eb; --accent-soft:#12292c;
+    --warn:#e0a955; --warn-soft:#2b2214; --warn-line:#4d3c1d;
+    --bad:#e58a80; --bad-soft:#2c1a18; --bad-line:#4d2b27;
+    --good:#7fc691; --good-soft:#16241a; --good-line:#2c4433;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:70px}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%}
+a{color:var(--accent); text-underline-offset:3px}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px}
+
+.nav{
+  position:sticky; top:0; z-index:50; background:var(--bg);
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{display:flex; align-items:center; gap:18px; height:56px}
+.nav-brand{font-weight:700; font-size:15px; letter-spacing:-.01em; white-space:nowrap}
+.nav-links{display:flex; gap:16px; overflow-x:auto; scrollbar-width:none; margin-left:auto}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--muted); text-decoration:none; font-size:14px; white-space:nowrap; padding:4px 0}
+.nav-links a:hover{color:var(--ink)}
+
+.hero{padding:64px 0 44px; border-bottom:1px solid var(--line)}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px; font-size:13px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:18px;
+}
+.eyebrow::before{content:""; width:26px; height:1px; background:var(--accent)}
+h1{
+  font-size:clamp(32px,5.4vw,54px); line-height:1.08; letter-spacing:-.025em;
+  margin:0 0 20px; font-weight:700; max-width:16ch;
+}
+.lede{font-size:clamp(18px,2.2vw,21px); color:var(--ink-2); max-width:62ch; margin:0 0 28px}
+.meta{display:flex; flex-wrap:wrap; gap:10px 26px; font-size:14px; color:var(--muted); margin-bottom:32px}
+.meta b{color:var(--ink); font-weight:600}
+
+.speakers{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px}
+.spk{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px}
+.spk .n{font-weight:650; font-size:15px; margin-bottom:3px}
+.spk .r{font-size:13.5px; color:var(--muted); line-height:1.45}
+
+section{padding:56px 0; border-bottom:1px solid var(--line)}
+.sec-num{font-family:var(--mono); font-size:13px; color:var(--accent); letter-spacing:.08em; margin-bottom:10px}
+h2{font-size:clamp(25px,3.4vw,34px); line-height:1.2; letter-spacing:-.02em; margin:0 0 14px; font-weight:700}
+h3{font-size:20px; line-height:1.3; margin:38px 0 12px; font-weight:650; letter-spacing:-.01em}
+h4{font-size:16.5px; margin:22px 0 8px; font-weight:650}
+p{margin:0 0 16px; max-width:74ch}
+.sub{color:var(--muted); font-size:16px; max-width:70ch; margin-top:-4px; margin-bottom:26px}
+ul,ol{margin:0 0 16px; padding-left:22px; max-width:74ch}
+li{margin-bottom:8px}
+li::marker{color:var(--muted)}
+strong{font-weight:650}
+
+.grid{display:grid; gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:20px 22px;
+}
+.card h4{margin-top:0}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.card .tag{
+  display:inline-block; font-size:11.5px; letter-spacing:.05em; text-transform:uppercase;
+  font-weight:650; color:var(--accent); background:var(--accent-soft);
+  padding:3px 9px; border-radius:100px; margin-bottom:10px;
+}
+.card.bad-c .tag{color:var(--bad); background:var(--bad-soft)}
+.card.good-c .tag{color:var(--good); background:var(--good-soft)}
+.card.warn-c .tag{color:var(--warn); background:var(--warn-soft)}
+
+.takeaways{counter-reset:t; display:grid; gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface)}
+.takeaway{display:flex; gap:18px; padding:20px 22px; border-bottom:1px solid var(--line)}
+.takeaway:last-child{border-bottom:none}
+.takeaway::before{
+  counter-increment:t; content:counter(t,decimal-leading-zero);
+  font-family:var(--mono); font-size:13px; color:var(--accent); padding-top:3px; flex:none;
+}
+.takeaway .tk{font-weight:650; margin-bottom:4px}
+.takeaway .td{color:var(--ink-2); font-size:15.5px; line-height:1.55}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:26px 0}
+.stat{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:20px}
+.stat .v{font-size:34px; font-weight:700; letter-spacing:-.03em; line-height:1.05; margin-bottom:6px}
+.stat .v small{font-size:18px; font-weight:600; color:var(--muted)}
+.stat .l{font-size:14px; color:var(--muted); line-height:1.45}
+.stat.up .v{color:var(--good)} .stat.down .v{color:var(--bad)} .stat.mark .v{color:var(--accent)}
+
+.note{border-radius:var(--radius); padding:18px 20px; margin:22px 0; border:1px solid var(--line); background:var(--surface-2)}
+.note p:last-child,.note ul:last-child{margin-bottom:0}
+.note .h{font-weight:650; margin-bottom:6px; font-size:15.5px}
+.note.warn{background:var(--warn-soft); border-color:var(--warn-line)} .note.warn .h{color:var(--warn)}
+.note.bad{background:var(--bad-soft); border-color:var(--bad-line)} .note.bad .h{color:var(--bad)}
+.note.good{background:var(--good-soft); border-color:var(--good-line)} .note.good .h{color:var(--good)}
+.note.acc{background:var(--accent-soft); border-color:var(--line)} .note.acc .h{color:var(--accent)}
+
+blockquote{
+  margin:22px 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  font-size:17.5px; line-height:1.6; color:var(--ink-2); max-width:70ch;
+}
+blockquote cite{display:block; margin-top:8px; font-size:14px; color:var(--muted); font-style:normal}
+
+.tw{overflow-x:auto; margin:22px 0; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:15px; min-width:520px}
+th,td{padding:11px 16px; text-align:left; border-bottom:1px solid var(--line)}
+th{font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:650; background:var(--surface-2)}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums; font-family:var(--mono); font-size:14px}
+.tcap{font-size:13.5px; color:var(--muted); margin:-12px 0 24px}
+
+figure{margin:28px 0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px 18px}
+figure .fw{overflow-x:auto}
+figcaption{font-size:13.5px; color:var(--muted); margin-top:14px; text-align:center; line-height:1.5}
+svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif}
+
+.check{list-style:none; padding:0; max-width:none}
+.check li{
+  display:flex; gap:14px; align-items:flex-start; background:var(--surface);
+  border:1px solid var(--line); border-radius:12px; padding:15px 18px; margin-bottom:10px;
+}
+.check li::before{content:"\2610"; font-size:19px; line-height:1.35; color:var(--accent); flex:none}
+.check b{display:block; margin-bottom:2px}
+.check span{color:var(--ink-2); font-size:15px; line-height:1.5}
+
+dl.gloss{margin:0; display:grid; grid-template-columns:minmax(140px,220px) 1fr; gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface)}
+dl.gloss dt{padding:14px 18px; font-weight:650; border-bottom:1px solid var(--line); background:var(--surface-2); font-size:15px}
+dl.gloss dd{margin:0; padding:14px 18px; border-bottom:1px solid var(--line); color:var(--ink-2); font-size:15px; line-height:1.55}
+@media (max-width:640px){
+  dl.gloss{grid-template-columns:1fr}
+  dl.gloss dt{border-bottom:none; padding-bottom:2px; background:var(--surface)}
+}
+
+footer{padding:48px 0 64px; color:var(--muted); font-size:14.5px}
+footer p{max-width:74ch}
+hr.soft{border:none; border-top:1px solid var(--line); margin:36px 0}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <span class="nav-brand">ФБС · разбор эфира</span>
+    <div class="nav-links">
+      <a href="#kratko">Коротко</a>
+      <a href="#kontekst">Контекст</a>
+      <a href="#cifry">Цифры</a>
+      <a href="#kak-rabotaet">Как работает</a>
+      <a href="#chz">Честный знак</a>
+      <a href="#ff">Фулфилмент</a>
+      <a href="#strategiya">Стратегия</a>
+      <a href="#dengi">Деньги</a>
+      <a href="#instrumenty">Инструменты</a>
+      <a href="#cheklist">Чек-лист</a>
+      <a href="#slovar">Словарь</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Эфир 27 августа 2026 · конспект</div>
+    <h1>Переезд на ФБС, пока горят склады</h1>
+    <p class="lede">
+      Что делать продавцу на Ozon и Wildberries, когда схема ФБО перестала быть безопасной:
+      реальные цифры по выкупаемости и срокам доставки, как не сломаться на честном знаке,
+      как выбирать фулфилмент и куда раскладывать товар.
+    </p>
+    <div class="meta">
+      <span><b>Формат:</b> Zoom-эфир, ~1,5 часа</span>
+      <span><b>Дата:</b> 27 августа 2026</span>
+      <span><b>Площадки:</b> Ozon, Wildberries</span>
+    </div>
+    <div class="speakers">
+      <div class="spk">
+        <div class="n">Ирина</div>
+        <div class="r">Ведущая эфира, действующий селлер. Считает экономику страховки, тарифы, комиссии.</div>
+      </div>
+      <div class="spk">
+        <div class="n">Евгений</div>
+        <div class="r">Сооснователь сервиса аналитики для селлеров (около 5 000 подключённых кабинетов). Даёт статистику на больших данных.</div>
+      </div>
+      <div class="spk">
+        <div class="n">Дмитрий Егоров</div>
+        <div class="r">Эксперт по честному знаку. Свой склад, более сотни кабинетов под управлением.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="kratko">
+  <div class="wrap">
+    <div class="sec-num">01</div>
+    <h2>Коротко: девять выводов</h2>
+    <p class="sub">Если времени мало — прочитайте только этот блок.</p>
+
+    <div class="takeaways">
+      <div class="takeaway"><div>
+        <div class="tk">С момента передачи товара маркетплейсу ФБО и ФБС по скорости не отличаются</div>
+        <div class="td">В среднем от заказа до выкупа: ФБО — 6 дней, ФБС — 7. Разница ровно в тех сутках, которые уходят на сборку. Это резко отличается от коллапса на WB, где после пожаров доставка ушла с 2 дней на две недели.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">Выкупаемость на ФБС ниже примерно на 5 процентных пунктов</div>
+        <div class="td">И это бьёт не только по логистике, но и по рекламе: ДР считается с учётом выкупа, поэтому та же кампания при ДР 10% станет стоить около 10,5%. Закладывайте в юнит-экономику заранее.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">Ozon выбирает склад отгрузки по прогнозному сроку доставки</div>
+        <div class="td">Не по принципу «ФБО важнее». Если ваш ФБС-склад прогнозно доедет быстрее перегруженного ФБО — заказ уедет с вашего склада. Работает и в обратную сторону.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">Главная боль ФБС — не маркетплейс, а фулфилмент</div>
+        <div class="td">Размещение 4–5 дней вместо мгновенного, поднятые в разы цены «наплевав на договор», отсутствие адресного хранения, пересорт и штрафы за него. Совет №1 от всех спикеров: съездить на склад физически.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">Ozon больше не принимает кизы в сборочное задание — пары «заказ ↔ киз» нет</div>
+        <div class="td">А без неё нельзя корректно вывести код из оборота и вернуть его обратно при возврате. Значит, нужна своя база пар: таблица, ВМС или сервис.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">1 октября — закон о платформенной экономике: маркетплейсы становятся участниками оборота</div>
+        <div class="td">Отсюда проверки статуса кода маркировки. WB уже предупредил: код не в обороте — товар едет к вам обезличкой за ваш счёт. У Ozon такого объявления пока нет, но по логике закона будет то же самое.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">Ничего не переклеивать и не менять баркоды — ждать разъяснений</div>
+        <div class="td">Официальный ответ WB: клеить можно тот баркод, который вам удобен, лишь бы поставка была сформирована по нему же. GTIN на этикетке достаточно вывести текстом. По техническим карточкам 029 ответа пока нет ни у кого.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">ФБО бросать не надо</div>
+        <div class="td">Рабочая тактика эфира: по коробке на каждый склад, чтобы реклама продолжала работать, плюс отгрузки в безопасные направления — Беларусь, Астана, дальние кластеры. И параллельно месяц-два выстраивать ФБС.</div>
+      </div></div>
+      <div class="takeaway"><div>
+        <div class="tk">У кого товар есть — тот сейчас растёт</div>
+        <div class="td">На WB после пожаров реклама обесценилась: бюджеты снизили в 5–10 раз, а количество заказов не изменилось. Кто успел встать на ФБС, забрал полки. Единственное их ограничение — фулфилмент не справляется.</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="kontekst">
+  <div class="wrap">
+    <div class="sec-num">02</div>
+    <h2>Контекст: что вообще произошло</h2>
+    <p class="sub">Почему разговор про ФБС стал разговором про выживание бизнеса, а не про схему для штучных товаров.</p>
+
+    <div class="stats">
+      <div class="stat down">
+        <div class="v">−40<small>%</small></div>
+        <div class="l">падение выручки Wildberries за 6–7 недель после начала пожаров на складах</div>
+      </div>
+      <div class="stat mark">
+        <div class="v">70<small> млрд ₽/нед</small></div>
+        <div class="l">продаж ушли в другие каналы — покупатели переключились очень быстро</div>
+      </div>
+      <div class="stat down">
+        <div class="v">2 → 14<small> дней</small></div>
+        <div class="l">во столько превратилась доставка на WB, когда все разом перешли на ФБС</div>
+      </div>
+      <div class="stat">
+        <div class="v">5–10<small>×</small></div>
+        <div class="l">во столько раз селлеры на WB снизили рекламные бюджеты — при том же числе заказов</div>
+      </div>
+    </div>
+
+    <p>
+      Первый удар пришёлся по Wildberries: разрушенные склады, порванные логистические цепочки,
+      уничтоженный товар. Часть продавцов при этом успела перестроиться за считаные недели —
+      и не просто выжила, а выиграла от передела рынка.
+    </p>
+
+    <blockquote>
+      Ozon очень много мер принял — и по поддержке селлеров, и по защите складов, просто сто из ста.
+      Но если полгода подряд атаки будут продолжаться, это в любом случае скажется на складах,
+      хранении, логистических цепочках и скоростях доставки.
+      <cite>Евгений</cite>
+    </blockquote>
+
+    <p>
+      Базовый прогноз эфира: <strong>с Ozon будет происходить то же самое, только медленнее</strong>.
+      Отсюда главный аргумент — не в пользу выгоды, а в пользу управления риском:
+      потенциальная потеря большой части бизнеса из-за одного инцидента несоизмерима с той прибылью,
+      которую вы дополнительно получаете, продолжая работать только по ФБО.
+    </p>
+
+    <div class="note acc">
+      <div class="h">Что важно понимать про передел рынка</div>
+      <p>
+        Если Wildberries продавал в вашей категории платьев на 5 млрд, а после пожаров стал продавать на 2 —
+        эти 3 млрд не исчезли, они куда-то перешли, и в основном на Ozon.
+        Смотрите не только на свой кабинет, а на то, что происходит с вашей категорией целиком:
+        это подсказывает, какой спрос вы можете забрать и к какому объёму готовить остатки.
+      </p>
+    </div>
+
+    <h3>Меры поддержки, о которых сказали в эфире</h3>
+    <div class="grid g3">
+      <div class="card good-c">
+        <span class="tag">Комиссии</span>
+        <p>Повышение комиссий с 28 августа смягчили: скидка около 3 процентных пунктов практически на все категории. Отдельно бегать за локальностью отгрузок больше не нужно — скидку дали «авансом».</p>
+      </div>
+      <div class="card good-c">
+        <span class="tag">Соинвестирование</span>
+        <p>С начала пожаров на WB Ozon снижал соинвест, но примерно за неделю-полторы до эфира перестал. Похоже, площадка справилась с нагрузкой — и соинвест может снова подрасти.</p>
+      </div>
+      <div class="card good-c">
+        <span class="tag">Сервисы</span>
+        <p>Часть сервисов аналитики снизила цены и открыла ФБС-функциональность бесплатно до конца осени. Подробности — в разделе «Инструменты».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cifry">
+  <div class="wrap">
+    <div class="sec-num">03</div>
+    <h2>Цифры: чем ФБС реально отличается от ФБО</h2>
+    <p class="sub">
+      Всё, что ниже, — агрегированная статистика сервиса по своим пользователям (обезличенные данные,
+      порядка 100 млрд ₽ заказов в месяц). Это средние по рынку, а не гарантия для вашей категории.
+    </p>
+
+    <h3>1. Выкупаемость падает примерно на 5 процентных пунктов</h3>
+    <p>
+      Взяли одних и тех же продавцов, которые перешли с ФБО на ФБС примерно с той же ценой,
+      и сравнили процент выкупа. На Ozon разница составила в среднем около 5 п.п.
+    </p>
+    <div class="grid g3">
+      <div class="card bad-c">
+        <span class="tag">Хуже среднего</span>
+        <h4>Красота и гигиена, автотовары</h4>
+        <p>Разница ближе к 8 п.п. Логика простая: товар хотят получить быстрее, ФБС едет дольше — заказы чаще отменяют прямо в пути.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Среднее</span>
+        <h4>По всем категориям</h4>
+        <p>Около 5 п.п. разницы между ФБО и ФБС на Ozon у одних и тех же продавцов при сопоставимой цене.</p>
+      </div>
+      <div class="card good-c">
+        <span class="tag">Лучше среднего</span>
+        <h4>Электроника</h4>
+        <p>Разница минимальная. Покупатель готов ждать — отмен из-за срока почти нет.</p>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <div class="h">Неочевидное следствие: дорожает реклама</div>
+      <p>
+        Рекламу вы оплачиваете за клики, но доля рекламных расходов считается с учётом выкупа.
+        Падает выкупаемость — растёт ДР при том же бюджете и том же количестве заказов.
+        Было 10% — станет примерно 10,5%. Это нужно заложить в новую экономику <em>до</em> переезда,
+        а не объяснять постфактум, почему юнит-экономика поехала.
+      </p>
+    </div>
+
+    <h3>2. Скорость доставки: разница — ровно ваши сутки на сборку</h3>
+    <p>
+      Считали от момента заказа до момента выкупа, то есть с учётом того, сколько товар лежит в пункте выдачи.
+      Для ФБС брали адреса складов пользователей, определяли кластер и смотрели все заказы с этих складов.
+    </p>
+
+    <figure>
+      <div class="fw">
+        <svg viewBox="0 0 900 250" width="900" height="250" role="img" aria-label="Сравнение сроков доставки: ФБО 6 дней, ФБС 7 дней, WB после пожаров 10-12 дней">
+          <g fill="currentColor" font-size="14">
+            <text x="0" y="34" font-weight="600">Ozon, ФБО</text>
+            <text x="0" y="96" font-weight="600">Ozon, ФБС</text>
+            <text x="0" y="158" font-weight="600">WB после пожаров</text>
+            <text x="0" y="222" opacity=".6" font-size="12.5">Дней от заказа до выкупа</text>
+          </g>
+          <g>
+            <rect x="200" y="16" width="300" height="26" rx="5" fill="var(--accent)"/>
+            <text x="512" y="35" font-size="15" font-weight="700" fill="var(--accent)">6,0 дня</text>
+
+            <rect x="200" y="78" width="350" height="26" rx="5" fill="var(--accent)" opacity=".62"/>
+            <text x="562" y="97" font-size="15" font-weight="700" fill="var(--accent)">7,0 дня</text>
+
+            <rect x="200" y="140" width="550" height="26" rx="5" fill="var(--bad)" opacity=".75"/>
+            <text x="762" y="159" font-size="15" font-weight="700" fill="var(--bad)">10–12</text>
+          </g>
+          <g stroke="currentColor" opacity=".18">
+            <line x1="200" y1="8" x2="200" y2="196"/>
+            <line x1="450" y1="8" x2="450" y2="196"/>
+            <line x1="700" y1="8" x2="700" y2="196"/>
+          </g>
+          <g fill="currentColor" opacity=".5" font-size="12">
+            <text x="196" y="212">0</text>
+            <text x="444" y="212">5</text>
+            <text x="694" y="212">10</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>
+        Разница между ФБО и ФБС на Ozon — один день, ровно те сутки, что уходят на сборку заказа.
+        Для сравнения: на WB после разрушения логистики срок вырос до 10–12 дней, покупатели начали массово отказываться,
+        а продавцы всё равно платили за логистику — это и привело к убыткам.
+      </figcaption>
+    </figure>
+
+    <blockquote>
+      С точки зрения скорости доставки от момента, как вы передали Ozon ваш товар, ФБО и ФБС не отличаются.
+      Это большой респект Ozon.
+      <cite>Евгений</cite>
+    </blockquote>
+
+    <h3>3. Отдельные маршруты, которые называли в эфире</h3>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Маршрут</th><th>Срок</th><th>Комментарий</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Москва → Москва</td><td class="num">2,8 дня</td><td>Включая время, пока товар лежит в пункте выдачи</td></tr>
+          <tr><td>Москва → Новосибирск, ФБО</td><td class="num">7 дней</td><td>—</td></tr>
+          <tr><td>Москва → Новосибирск, ФБС</td><td class="num">7,8 дня</td><td>Те же плюс сутки на сборку</td></tr>
+          <tr><td>Новосибирск → восточные кластеры</td><td class="num">5,4 дня</td><td>Новосибирск, Тюмень, Дальний Восток, Омск, Красноярск</td></tr>
+          <tr><td>Москва → те же восточные кластеры</td><td class="num">8,2 дня</td><td>Выигрыш от присутствия за Уралом — 2,8 дня по ФБО и всего 1,8 по ФБС</td></tr>
+          <tr><td>Алматы / Астана / Беларусь → основные кластеры</td><td class="num">≈ 9 дней</td><td>Астана чуть быстрее — около 8,7</td></tr>
+          <tr><td>Беларусь → Москва</td><td class="num">5 дней</td><td>Против 2,8 из самой Москвы</td></tr>
+          <tr><td>Беларусь → Санкт-Петербург</td><td class="num">5 дней</td><td>—</td></tr>
+          <tr><td>Беларусь → Красноярск</td><td class="num">11 дней</td><td>—</td></tr>
+          <tr><td>Беларусь → Калининград</td><td class="num">17 дней</td><td>Самый длинный из названных маршрутов</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">Цифры прозвучали в эфире со ссылкой на внутреннюю таблицу сервиса; полная матрица кластеров — в бесплатном файле, см. раздел «Инструменты».</p>
+
+    <div class="note good">
+      <div class="h">Практический вывод по географии</div>
+      <p>
+        Разница между «лежать в Новосибирске» и «лежать в Москве» для востока страны — меньше трёх дней,
+        а по ФБС меньше двух. Значит, критичность физического присутствия в каждом регионе ниже,
+        чем принято думать. Можно спокойно отгружаться в безопасные направления — Беларусь, Астана, Новосибирск —
+        и пожертвовать одним-двумя днями срока ради того, чтобы товар в принципе уцелел.
+      </p>
+    </div>
+
+    <h3>4. Как Ozon решает, с какого склада поедет заказ</h3>
+    <p>
+      Приоритет один — <strong>прогнозный срок доставки конечному покупателю</strong>. Каждый раз при заказе
+      система смотрит, откуда товар доедет быстрее, и оттуда его и отправляет. Это касается и связки ФБО ↔ ФБС.
+    </p>
+
+    <figure>
+      <div class="fw">
+        <svg viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="Схема выбора склада отгрузки по прогнозному сроку доставки">
+          <defs>
+            <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="currentColor" opacity=".55"/>
+            </marker>
+          </defs>
+          <g font-size="14" fill="currentColor">
+            <rect x="1" y="20" width="230" height="62" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+            <text x="18" y="46" font-weight="650">Ваш ФБС-склад</text>
+            <text x="18" y="68" opacity=".65" font-size="13">прогноз ≈ 2 дня</text>
+
+            <rect x="1" y="118" width="230" height="62" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+            <text x="18" y="144" font-weight="650">ФБО, склад рядом</text>
+            <text x="18" y="166" opacity=".65" font-size="13">перегружен, прогноз ≈ 4 дня</text>
+
+            <rect x="1" y="216" width="230" height="62" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+            <text x="18" y="242" font-weight="650">ФБО, дальний склад</text>
+            <text x="18" y="264" opacity=".65" font-size="13">прогноз ≈ 6 дней</text>
+          </g>
+
+          <g stroke="currentColor" stroke-opacity=".45" fill="none" marker-end="url(#ar)">
+            <path d="M236 51 L 300 51 L 300 140 L 352 140"/>
+            <path d="M236 149 L 352 149"/>
+            <path d="M236 247 L 300 247 L 300 158 L 352 158"/>
+          </g>
+
+          <rect x="356" y="106" width="228" height="88" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-opacity=".45"/>
+          <text x="378" y="140" font-size="14.5" font-weight="650" fill="var(--accent)">Алгоритм Ozon</text>
+          <text x="378" y="163" font-size="13" fill="currentColor" opacity=".75">выбирает минимальный</text>
+          <text x="378" y="181" font-size="13" fill="currentColor" opacity=".75">прогнозный срок доставки</text>
+
+          <path d="M590 150 L 646 150" stroke="currentColor" stroke-opacity=".45" fill="none" marker-end="url(#ar)"/>
+
+          <rect x="650" y="106" width="248" height="88" rx="12" fill="var(--good-soft)" stroke="var(--good)" stroke-opacity=".4"/>
+          <text x="672" y="140" font-size="14.5" font-weight="650" fill="var(--good)">Заказ уезжает с ФБС</text>
+          <text x="672" y="163" font-size="13" fill="currentColor" opacity=".75">даже при наличии стока</text>
+          <text x="672" y="181" font-size="13" fill="currentColor" opacity=".75">на складах ФБО</text>
+        </svg>
+      </div>
+      <figcaption>
+        Как только выбор сделан и заказ ушёл, перекинуть его на другой склад уже нельзя.
+        Поэтому быстрая сборка на ФБС — это не только про срок, но и про то, будете ли вы вообще участвовать в раздаче заказов.
+      </figcaption>
+    </figure>
+
+    <div class="note acc">
+      <div class="h">Пример того, насколько эта логика неочевидна</div>
+      <p>
+        Сервис взял все случаи, когда товар лежал одновременно в Новосибирске и Красноярске, но отсутствовал на Дальнем Востоке, —
+        получилось около 10 000 заказов. Из них примерно <strong>9 500 уехали из Новосибирска</strong> и лишь около 500 — из Красноярска.
+        То есть Дальний Восток статистически закрывает Новосибирск, а не более близкий на карте Красноярск.
+        С вашими ФБС-складами будет та же неочевидность: какие кластеры они реально закрывают, видно только по статистике.
+      </p>
+    </div>
+
+    <h3>5. Соинвестирование и скрытые 5,5%</h3>
+    <div class="stats">
+      <div class="stat">
+        <div class="v">47,5<small>%</small></div>
+        <div class="l">средний соинвест на Ozon до начала пожаров на WB</div>
+      </div>
+      <div class="stat down">
+        <div class="v">45,5<small>%</small></div>
+        <div class="l">к моменту эфира: снижали примерно на 2 п.п., затем перестали</div>
+      </div>
+      <div class="stat mark">
+        <div class="v">5,5<small>%</small></div>
+        <div class="l">последняя миля, которую переложили на покупателя и которой нет в вашем отчёте о заказах</div>
+      </div>
+    </div>
+    <p>
+      Механика скрытых процентов такая. Раньше была услуга «последняя миля» — 5,5% от цены товара.
+      Затем доставку до пункта выдачи переложили на покупателя. В корзине покупатель видит «доставка 120 ₽ и скидка 120 ₽»,
+      то есть формально бесплатно, — но эти 120 ₽ уже заложены в цену, которую он платит.
+      В отчёт о заказах к вам попадает сумма <strong>меньше</strong> на эту величину.
+    </p>
+    <p>
+      Отсюда два следствия. Первое: фактическую цену покупателя вы не видите — проверить можно, только выкупив
+      собственный товар и открыв чек в личном кабинете. Второе: публичные средние по соинвесту слегка завышены,
+      потому что считаются без вычета этих 5,5%. Так как надбавка применяется ко всем товарам одинаково,
+      сравнивать цифры между собой по-прежнему корректно.
+    </p>
+    <p>
+      Отдельно стоит помнить, что цена для покупателя <strong>разная в разных кластерах и даже для разных покупателей</strong>:
+      один и тот же товар в один и тот же момент может стоить около 3 470 ₽ в Москве, 3 670 ₽ в Новосибирске и 3 300 ₽ в Барнауле.
+    </p>
+  </div>
+</section>
+
+<section id="kak-rabotaet">
+  <div class="wrap">
+    <div class="sec-num">04</div>
+    <h2>Как устроен цикл ФБС-заказа</h2>
+    <p class="sub">Схема одна и та же на Ozon и WB. Ломается она в одном месте — там, где нужно связать заказ с кодом маркировки.</p>
+
+    <figure>
+      <div class="fw">
+        <svg viewBox="0 0 940 330" width="940" height="330" role="img" aria-label="Цикл ФБС-заказа от поступления до вывода киза из оборота и возврата">
+          <defs>
+            <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="currentColor" opacity=".5"/>
+            </marker>
+          </defs>
+          <g font-size="13.5">
+            <g>
+              <rect x="1" y="30" width="168" height="76" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+              <text x="16" y="56" font-weight="650" fill="currentColor">1. Заказ пришёл</text>
+              <text x="16" y="77" fill="currentColor" opacity=".68">маркетплейс отдаёт</text>
+              <text x="16" y="94" fill="currentColor" opacity=".68">сборочное задание</text>
+            </g>
+            <g>
+              <rect x="193" y="30" width="168" height="76" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+              <text x="208" y="56" font-weight="650" fill="currentColor">2. Сборка</text>
+              <text x="208" y="77" fill="currentColor" opacity=".68">свой склад или</text>
+              <text x="208" y="94" fill="currentColor" opacity=".68">фулфилмент, ~1 сутки</text>
+            </g>
+            <g>
+              <rect x="385" y="30" width="168" height="76" rx="10" fill="var(--warn-soft)" stroke="var(--warn)" stroke-opacity=".45"/>
+              <text x="400" y="56" font-weight="650" fill="var(--warn)">3. Пара заказ ↔ киз</text>
+              <text x="400" y="77" fill="currentColor" opacity=".68">узкое место: Ozon</text>
+              <text x="400" y="94" fill="currentColor" opacity=".68">эту пару не хранит</text>
+            </g>
+            <g>
+              <rect x="577" y="30" width="168" height="76" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+              <text x="592" y="56" font-weight="650" fill="currentColor">4. Отгрузка</text>
+              <text x="592" y="77" fill="currentColor" opacity=".68">на СЦ или ПВЗ,</text>
+              <text x="592" y="94" fill="currentColor" opacity=".68">по очередям — как повезёт</text>
+            </g>
+            <g>
+              <rect x="769" y="30" width="168" height="76" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+              <text x="784" y="56" font-weight="650" fill="currentColor">5. Доставка</text>
+              <text x="784" y="77" fill="currentColor" opacity=".68">до покупателя,</text>
+              <text x="784" y="94" fill="currentColor" opacity=".68">в среднем 7 дней</text>
+            </g>
+          </g>
+
+          <g stroke="currentColor" stroke-opacity=".4" fill="none" marker-end="url(#ar2)">
+            <path d="M172 68 L 188 68"/>
+            <path d="M364 68 L 380 68"/>
+            <path d="M556 68 L 572 68"/>
+            <path d="M748 68 L 764 68"/>
+            <path d="M853 110 L 853 150"/>
+          </g>
+
+          <g font-size="13.5">
+            <rect x="700" y="152" width="237" height="66" rx="10" fill="var(--good-soft)" stroke="var(--good)" stroke-opacity=".4"/>
+            <text x="716" y="178" font-weight="650" fill="var(--good)">6а. Выкуп</text>
+            <text x="716" y="200" fill="currentColor" opacity=".7">киз выводим из оборота</text>
+
+            <rect x="700" y="238" width="237" height="66" rx="10" fill="var(--bad-soft)" stroke="var(--bad)" stroke-opacity=".4"/>
+            <text x="716" y="264" font-weight="650" fill="var(--bad)">6б. Отказ или возврат</text>
+            <text x="716" y="286" fill="currentColor" opacity=".7">киз возвращаем в оборот</text>
+          </g>
+
+          <g stroke="currentColor" stroke-opacity=".4" fill="none" marker-end="url(#ar2)">
+            <path d="M853 222 L 853 234"/>
+            <path d="M696 271 L 470 271 L 470 116"/>
+          </g>
+          <text x="486" y="292" font-size="13" fill="currentColor" opacity=".6">товар и киз возвращаются в цикл — но только если вы знаете, какой киз куда уехал</text>
+        </svg>
+      </div>
+      <figcaption>Красный и жёлтый блоки — те два места, где чаще всего рушится учёт: связка заказа с кодом маркировки и обработка возврата.</figcaption>
+    </figure>
+
+    <p>
+      До 2026 года ФБС был схемой «для особых случаев»: дорогой в хранении товар, штучные позиции,
+      которые не хочется держать на ФБО ради оборачиваемости, или тестовый запуск новинки.
+      Сейчас, особенно для тех, кто переезжает с WB, ФБС становится основной схемой — со всеми
+      организационными последствиями, к которым бизнес-процессы не были готовы.
+    </p>
+
+    <div class="note">
+      <div class="h">Три задачи, которые нужно закрыть, чтобы ФБС заработал</div>
+      <ul>
+        <li><strong>Складской учёт.</strong> Где и сколько лежит на каждом складе, что приехало, что уехало.</li>
+        <li><strong>Интеграция с маркетплейсами.</strong> Подтягивать заказы, резервировать под них остаток, возвращать обновлённый остаток на площадку — по всем кабинетам сразу.</li>
+        <li><strong>Честный знак.</strong> Отслеживание кизов, вывод и возврат в оборот, перемаркировка. Самая тяжёлая часть — ей посвящён следующий раздел.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="chz">
+  <div class="wrap">
+    <div class="sec-num">05</div>
+    <h2>Честный знак: самое узкое место</h2>
+    <p class="sub">
+      Блок Дмитрия Егорова. Здесь разбор того, что именно сломалось, какие есть два пути,
+      что будет 1 октября и почему сейчас правильное действие — ничего не переклеивать.
+    </p>
+
+    <h3>Что сломалось</h3>
+    <p>
+      Раньше кизы сканировали прямо в сборочное задание Ozon. По инструкции так было положено делать только
+      при продажах юридическим лицам, но это не возбранялось, и все так делали — хотя механика работала
+      неидеально и данные не всегда сходились с фактом.
+    </p>
+    <p>
+      <strong>Сейчас сканировать кизы некуда.</strong> При продаже по ФБС на Ozon вы не передаёте код маркировки маркетплейсу.
+      Киз просто нанесён на товар, и дальше площадку он не интересует. Для сравнения: на Wildberries киз
+      привязывается к внутреннему идентификатору отправления (стикеру), и вся жизненная цепочка кода видна.
+    </p>
+
+    <div class="note bad">
+      <div class="h">Следствие</div>
+      <p>
+        Чтобы обработать код — вывести из оборота после продажи или вернуть в оборот после возврата, —
+        нужно знать, <strong>какой киз к какому сборочному заданию привязан</strong>. Ozon эти данные ни в одном
+        разумном отчёте не отдаёт. Значит, пару «номер заказа ↔ киз» вы обязаны хранить сами.
+      </p>
+    </div>
+
+    <h3>Что требует закон</h3>
+    <p>
+      В каждом отраслевом постановлении Правительства требование одинаковое: вывести товар из оборота
+      при дистанционной продаже <strong>в срок не более трёх рабочих дней с момента отгрузки заказа и не позднее даты
+      доставки покупателю</strong>. Для вывода нужны номер и дата кассового чека продажи.
+    </p>
+    <p>
+      И вот здесь противоречие, которое невозможно решить «по правилам»: на момент отгрузки чека ещё нет.
+      При предоплате неизвестно, заберёт человек товар или нет; при постоплате фискализации вообще не произошло —
+      покупатель ещё не заплатил. То есть данных для корректного вывода нет, а вывести вы обязаны.
+    </p>
+
+    <h3>Два пути, между которыми выбирает рынок</h3>
+
+    <figure>
+      <div class="fw">
+        <svg viewBox="0 0 900 340" width="900" height="340" role="img" aria-label="Два пути работы с кизами на ФБС: вывод под отгрузку и собственная база пар заказ-киз">
+          <g font-size="13.5">
+            <rect x="1" y="1" width="430" height="330" rx="14" fill="var(--warn-soft)" stroke="var(--warn-line)"/>
+            <text x="26" y="38" font-size="15.5" font-weight="700" fill="var(--warn)">Путь А. Выводить под отгрузку</text>
+            <text x="26" y="60" fill="currentColor" opacity=".7">«Удобное нарушение» — так делает большинство</text>
+
+            <rect x="26" y="80" width="380" height="52" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".14"/>
+            <text x="44" y="102" fill="currentColor" font-weight="600">1. Отгрузили заказ</text>
+            <text x="44" y="121" fill="currentColor" opacity=".68">сразу выводим киз из оборота</text>
+
+            <rect x="26" y="144" width="380" height="52" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".14"/>
+            <text x="44" y="166" fill="currentColor" font-weight="600">2. В документе — основание «прочее»</text>
+            <text x="44" y="185" fill="currentColor" opacity=".68">пишем номер заказа или дату сборочных заданий</text>
+
+            <rect x="26" y="208" width="380" height="98" rx="9" fill="var(--surface)" stroke="var(--bad)" stroke-opacity=".35"/>
+            <text x="44" y="230" fill="var(--bad)" font-weight="650">Риск</text>
+            <text x="44" y="252" fill="currentColor" opacity=".72">возврат на ФБО прилетает с кодом не в обороте;</text>
+            <text x="44" y="271" fill="currentColor" opacity=".72">вернуть его нельзя — вы не знаете, какой киз уехал;</text>
+            <text x="44" y="290" fill="currentColor" opacity=".72">с 1 октября это будут проверять</text>
+          </g>
+
+          <g font-size="13.5">
+            <rect x="461" y="1" width="438" height="330" rx="14" fill="var(--good-soft)" stroke="var(--good-line)"/>
+            <text x="486" y="38" font-size="15.5" font-weight="700" fill="var(--good)">Путь Б. Своя база пар</text>
+            <text x="486" y="60" fill="currentColor" opacity=".7">Более-менее правильный путь</text>
+
+            <rect x="486" y="80" width="388" height="52" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".14"/>
+            <text x="504" y="102" fill="currentColor" font-weight="600">1. При сборке пикаем киз</text>
+            <text x="504" y="121" fill="currentColor" opacity=".68">и привязываем к сборочному заданию</text>
+
+            <rect x="486" y="144" width="388" height="52" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".14"/>
+            <text x="504" y="166" fill="currentColor" font-weight="600">2. Сопоставляем с отчётом о продажах</text>
+            <text x="504" y="185" fill="currentColor" opacity=".68">Excel, ВМС, товароучёт или сервис</text>
+
+            <rect x="486" y="208" width="388" height="98" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-opacity=".35"/>
+            <text x="504" y="230" fill="var(--good)" font-weight="650">Результат</text>
+            <text x="504" y="252" fill="currentColor" opacity=".72">вывод из оборота только после факта продажи;</text>
+            <text x="504" y="271" fill="currentColor" opacity=".72">возврат в оборот при отказе;</text>
+            <text x="504" y="290" fill="currentColor" opacity=".72">проверку 1 октября проходим спокойно</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>
+        Путь А проще и работает прямо сейчас, но упирается в возвраты и в грядущие проверки.
+        Путь Б требует либо ручного труда, либо сервиса, который ведёт пары автоматически.
+      </figcaption>
+    </figure>
+
+    <blockquote>
+      В целом неважно, что мы там напишем, — это так или иначе немножко нарушение. Поэтому мы нарушаем так,
+      как нам удобно. Я вообще пропагандирую удобные нарушения. Но, справедливости ради, пока за это никому не прилетало.
+      <cite>Дмитрий Егоров, про путь А</cite>
+    </blockquote>
+
+    <div class="note warn">
+      <div class="h">Почему ручная таблица перестаёт работать на объёме</div>
+      <p>
+        При 100–300 заказах в день ведение Excel уже требует отдельного человека, который целый день только пикает кизы.
+        При 2–3 тысячах заказов в день это не работает вообще. Плюс фулфилмент такую таблицу вам вести не будет:
+        если у площадки нет ВМС с поддержкой кизов — про этот путь можно забыть и остаётся только путь А.
+      </p>
+    </div>
+
+    <h3>Что делать с возвратом</h3>
+    <p>Дальше развилка, и от неё зависит, отделаетесь ли вы одной операцией или проблемой.</p>
+
+    <figure>
+      <div class="fw">
+        <svg viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="Развилка возврата: автовозврат в ПВЗ или возврат на ФБО, и что делать с кизом">
+          <defs>
+            <marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="currentColor" opacity=".5"/>
+            </marker>
+          </defs>
+          <rect x="1" y="112" width="216" height="72" rx="11" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+          <text x="20" y="142" font-size="14.5" font-weight="650" fill="currentColor">Покупатель отказался</text>
+          <text x="20" y="164" font-size="13.5" fill="currentColor" opacity=".68">или вернул товар</text>
+
+          <g stroke="currentColor" stroke-opacity=".4" fill="none" marker-end="url(#ar3)">
+            <path d="M221 148 L 258 148 L 258 66 L 296 66"/>
+            <path d="M221 148 L 258 148 L 258 232 L 296 232"/>
+          </g>
+
+          <rect x="300" y="24" width="256" height="84" rx="11" fill="var(--good-soft)" stroke="var(--good)" stroke-opacity=".4"/>
+          <text x="320" y="52" font-size="14.5" font-weight="650" fill="var(--good)">Автовозврат в ваш ПВЗ</text>
+          <text x="320" y="74" font-size="13.5" fill="currentColor" opacity=".7">товар физически у вас в руках,</text>
+          <text x="320" y="92" font-size="13.5" fill="currentColor" opacity=".7">наклейка с кизом видна</text>
+
+          <rect x="300" y="190" width="256" height="84" rx="11" fill="var(--bad-soft)" stroke="var(--bad)" stroke-opacity=".4"/>
+          <text x="320" y="218" font-size="14.5" font-weight="650" fill="var(--bad)">Возврат на ФБО</text>
+          <text x="320" y="240" font-size="13.5" fill="currentColor" opacity=".7">товар уходит на склад площадки,</text>
+          <text x="320" y="258" font-size="13.5" fill="currentColor" opacity=".7">вы его не видите</text>
+
+          <g stroke="currentColor" stroke-opacity=".4" fill="none" marker-end="url(#ar3)">
+            <path d="M560 66 L 600 66"/>
+            <path d="M560 232 L 600 232"/>
+          </g>
+
+          <rect x="604" y="14" width="294" height="104" rx="11" fill="var(--surface)" stroke="currentColor" stroke-opacity=".16"/>
+          <text x="624" y="42" font-size="14" font-weight="650" fill="currentColor">Возвращаем киз в оборот</text>
+          <text x="624" y="64" font-size="13" fill="currentColor" opacity=".7">Если вернулся без пакета и без киза —</text>
+          <text x="624" y="82" font-size="13" fill="currentColor" opacity=".7">делаем перемаркировку, указав прошлый</text>
+          <text x="624" y="100" font-size="13" fill="currentColor" opacity=".7">код маркировки. Дальше едет с новым.</text>
+
+          <rect x="604" y="180" width="294" height="104" rx="11" fill="var(--surface)" stroke="var(--bad)" stroke-opacity=".3"/>
+          <text x="624" y="208" font-size="14" font-weight="650" fill="var(--bad)">Код обязан быть в обороте</text>
+          <text x="624" y="230" font-size="13" fill="currentColor" opacity=".7">Иначе площадка при проверке отправит</text>
+          <text x="624" y="248" font-size="13" fill="currentColor" opacity=".7">товар обезличкой за ваш счёт.</text>
+          <text x="624" y="266" font-size="13" fill="currentColor" opacity=".7">WB это уже прямо объявил.</text>
+        </svg>
+      </div>
+      <figcaption>
+        Если у вас всегда стоит автовозврат в ПВЗ — жить можно и без базы пар: вы видите киз своими глазами.
+        Как только часть возвратов уходит на ФБО, база становится обязательной.
+      </figcaption>
+    </figure>
+
+    <h3>1 октября: закон о платформенной экономике</h3>
+    <p>
+      С 1 октября маркетплейсы становятся полноценными участниками оборота товаров. Практическое следствие для продавца —
+      <strong>проверки статуса кода маркировки</strong>. Wildberries предупредил об этом честно и жёстко: код вывели из оборота,
+      он поехал к клиенту, вернулся на склад, площадка проверила — если код не в обороте, товар едет обратно к вам
+      обезличкой и за ваш счёт. Ozon на момент эфира про механику проверок ничего не объявлял.
+    </p>
+
+    <h4>Требование по GTIN на этикетке</h4>
+    <p>
+      Само требование не новое и вытекает из 289-ФЗ: GTIN должен быть, должен быть на этикетке, видимый и читаемый.
+      Проверка производится через ГИС МТ по цепочке: из киза берётся GTIN → проверяется по базе → проверяется регистрация
+      продавца по ИНН → есть ли карточка с таким GTIN → принадлежит ли она этому продавцу → в обороте ли код. Всё.
+    </p>
+    <div class="grid g2">
+      <div class="card good-c">
+        <span class="tag">Что делать</span>
+        <ul>
+          <li>Выводить GTIN на этикетку <strong>текстом</strong> — этого достаточно, штрихкод не обязателен.</li>
+          <li>Брать GTIN из ГИС МТ: там он хранится отдельным столбцом, доступен по API и есть в любой программе, работающей с кизами.</li>
+          <li>Если столбца под рукой нет — взять код маркировки и отрезать всё до (01) и после (21). Делается даже в 1С без программиста.</li>
+          <li>Делать это на новых товарах при стикировке — не переклеивая уже готовые.</li>
+        </ul>
+      </div>
+      <div class="card bad-c">
+        <span class="tag">Чего не делать</span>
+        <ul>
+          <li>Не переклеивать существующие этикетки и не менять баркоды. Работает — не чини.</li>
+          <li>Не паниковать из-за новостей, выходящих вечером в пятницу: разъяснения обещаны в ближайшие дни.</li>
+          <li>Если всё же печатаете GTIN штрихкодом — следите за соответствием: 13 знаков без нуля должны совпадать с карточкой, 14 знаков с нулём печатаются в Code 128, и поставка формируется по тому же баркоду.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note acc">
+      <div class="h">Официальный ответ WB, полученный через ЦРП</div>
+      <p>
+        Клеить на этикетку можно тот баркод, который вам удобен — хоть баркод WB, хоть GTIN.
+        Главное, чтобы <strong>поставка была сформирована по тому же баркоду, который на этикетке</strong>.
+        Это принципиальное отличие двух площадок: WB сделал ставку на баркод (не совпал — получите товар обратно),
+        Ozon — на артикул (приедет с любым баркодом, лишь бы он был в карточке).
+      </p>
+    </div>
+
+    <h4>Что означает ноль перед GTIN</h4>
+    <p>
+      Вопрос, который всплывает постоянно. По инструкции ассоциации GS1 первая цифра обозначает уровень упаковки:
+      <strong>0 — это одна единица товара</strong>, 1 и далее — короб, паллета, контейнер и так далее.
+      Поскольку ваша карточка — это единица товара (пусть даже набор или комплект), ноль подставляется автоматически.
+      Групповой упаковки там быть не может. И да, разделители (01) и (21) в коде должны быть в скобках — если шаблонизатор
+      их не рисует, это не ошибка данных, а отображение.
+    </p>
+
+    <h4>Нерешённая проблема: технические карточки 029</h4>
+    <div class="note warn">
+      <div class="h">Ответа нет ни у кого, вопрос поднят и в ЦРП, и на площадках</div>
+      <p>
+        GTIN выдаёт ассоциация GS1 Rus, и он уникален в мире — такие коды начинаются с 046.
+        А все технические карточки, перемаркировки и маркировка остатков сделаны в нумерации <strong>029</strong>:
+        этот код товара генерирует сам честный знак, он может быть неуникальным и повторяться от карточки к карточке
+        (один код на брюки, юбки и рубашки сразу).
+      </p>
+      <p>
+        Отсюда две проблемы: в поле GTIN на этикетке нечего указать, и один код нельзя привязать более чем к одной карточке.
+        Таких остатков много, и с каждой новой товарной группой в маркировке их будет больше — потому что 029 делается
+        бесплатно, а 046 требует платного членства в GS1 Rus. Запрета продавать такие коды с 1 октября нет и, по мнению
+        эксперта, быть не может — коды получены законным путём. Но официального разъяснения на момент эфира не было.
+      </p>
+    </div>
+
+    <div class="note good">
+      <div class="h">Автоматизация уже существует</div>
+      <p>
+        Сервисы, специализирующиеся на кизах, забирают данные о продажах по API, сами определяют, какой код нужно вывести
+        из оборота, а какой вернуть, и готовят документ одной кнопкой. Подписать его вашей ЭЦП всё равно должны вы —
+        без вашего участия отправить в честный знак сервис не имеет права. Для WB это уже работает, для Ozon делалось
+        в момент эфира. Технических препятствий нет: данные получает любой API-ключ, просто раньше этим никто не занимался.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="ff">
+  <div class="wrap">
+    <div class="sec-num">06</div>
+    <h2>Фулфилмент: где на самом деле ломается ФБС</h2>
+    <p class="sub">
+      Опросили крупных селлеров, которые месяц назад столкнулись с пожарами на WB, и попросили назвать
+      главный геморрой своими словами. Аналитика и автоматизация в этом списке не на первом месте.
+    </p>
+
+    <blockquote>
+      Когда нужно отгрузить 5 000 заказов в день, реальной проблемой для роста становятся фулфилменты.
+      <cite>Евгений</cite>
+    </blockquote>
+
+    <div class="grid g2">
+      <div class="card bad-c">
+        <span class="tag">Проблема 1</span>
+        <h4>Долгое размещение</h4>
+        <p>
+          На ФБО поставку привезли — она сразу в продаже. На фулфилменте товар нужно ещё разместить,
+          и это в среднем <strong>4–5 дней</strong> до того, как остаток начнёт отображаться по ФБС.
+          Плюс инвентаризация: захотели пересчитать, что-то не сошлось — 1–2 дня всё стоит.
+        </p>
+      </div>
+      <div class="card bad-c">
+        <span class="tag">Проблема 2</span>
+        <h4>В регионах нет хороших площадок</h4>
+        <p>
+          В Москве примерно 8 из 10 фулфилментов работают без адресного хранения, без нормальной ВМС и автоматизации.
+          В дальних регионах хороших нет вообще, а единственный приличный уже забит селлерами с WB.
+          Найти качественный фулфилмент — задача на ближайшие полгода.
+        </p>
+      </div>
+      <div class="card bad-c">
+        <span class="tag">Проблема 3</span>
+        <h4>Цены поднимают в разы, договор не работает</h4>
+        <p>
+          Схема, о которой рассказывают восемь из десяти: договорились по 100 ₽ за обработку, привезли товар —
+          «будет по 200». На возражение про договор отвечают: «идите в суд или забирайте товар».
+          А забрать нельзя — «кладовщики заняты, отгрузим через две недели».
+        </p>
+      </div>
+      <div class="card bad-c">
+        <span class="tag">Проблема 4</span>
+        <h4>Пересорт и штрафы</h4>
+        <p>
+          На ФБО вы собираете тысячу одинаковых синих платьев — перепутать сложно. На ФБС каждый заказ —
+          это одна-две единицы, и вероятность ошибки кратно выше. На WB штрафы за отправку некорректного товара
+          доходят <strong>до 5 млн ₽</strong>, и их уже начали закладывать в экономику как постоянную статью.
+        </p>
+      </div>
+    </div>
+
+    <div class="note good">
+      <div class="h">Совет, который повторили оба спикера</div>
+      <p>
+        <strong>Съездите на фулфилмент физически.</strong> В переписке и на видео всё звучит прекрасно; приезжаешь —
+        и оказывается, что стеллажей нет вообще, арендована «чистая плоскость», по которой разложены коробки и тюки.
+        Отправьте сотрудника или съездите сами: это самый дешёвый способ снизить вероятность того, что вас кинут.
+      </p>
+    </div>
+
+    <div class="note acc">
+      <div class="h">И обратная сторона: сейчас это ещё и возможность</div>
+      <p>
+        На WB после пожаров реклама резко обесценилась. Селлеры снизили рекламные бюджеты в 5–10 раз,
+        а количество заказов не изменилось: у кого есть товар — тот занимает первые места в выдаче.
+        Знакомые кабинеты, по словам Евгения, уже восстановили допожарный уровень на одном ФБС,
+        и их единственное ограничение — фулфилмент физически не справляется с объёмом.
+        Кстати, если вы давно хотели открыть новый бизнес, качественный региональный фулфилмент сейчас —
+        одна из самых очевидных ниш.
+      </p>
+    </div>
+
+    <h3>Почему стоит вести учёт у себя, а не только в ВМС фулфилмента</h3>
+    <ul>
+      <li><strong>Контроль.</strong> Фулфилменты теряют товар, и доказать потерю по их же внутренней системе почти невозможно.</li>
+      <li><strong>Единый стандарт.</strong> У всех ВМС разные: с кизами и без, с адресным хранением и без. Своя система — одна на всех подрядчиков.</li>
+      <li><strong>Смена подрядчика.</strong> Один фулфилмент не передаст данные из своей ВМС другому. Если у вас две площадки — у вас две несовместимые системы.</li>
+      <li><strong>Товар в пути.</strong> Закупку из Китая, которая ещё едет, ВМС обычно не учитывает — а в своей системе её можно завести сразу и считать по ней прогноз.</li>
+    </ul>
+    <p>
+      При этом у фулфилмента есть непобедимое преимущество: у него физически лежит ваш товар. Речь не о замене, а о втором контуре учёта.
+    </p>
+  </div>
+</section>
+
+<section id="strategiya">
+  <div class="wrap">
+    <div class="sec-num">07</div>
+    <h2>Стратегия: куда раскладывать товар</h2>
+    <p class="sub">Сводный ответ эфира на вопрос «мне вообще куда грузиться прямо сейчас».</p>
+
+    <figure>
+      <div class="fw">
+        <svg viewBox="0 0 900 380" width="900" height="380" role="img" aria-label="Дерево решений: что делать в зависимости от того, выстроен ли ФБС">
+          <defs>
+            <marker id="ar4" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="currentColor" opacity=".5"/>
+            </marker>
+          </defs>
+          <rect x="290" y="1" width="320" height="62" rx="11" fill="var(--accent-soft)" stroke="var(--accent)" stroke-opacity=".4"/>
+          <text x="450" y="30" text-anchor="middle" font-size="15" font-weight="650" fill="var(--accent)">У вас уже выстроен ФБС?</text>
+          <text x="450" y="51" text-anchor="middle" font-size="13" fill="currentColor" opacity=".7">то есть склад, сборка и учёт кизов работают</text>
+
+          <g stroke="currentColor" stroke-opacity=".4" fill="none" marker-end="url(#ar4)">
+            <path d="M380 66 L 380 88 L 200 88 L 200 112"/>
+            <path d="M520 66 L 520 88 L 700 88 L 700 112"/>
+          </g>
+          <text x="250" y="83" font-size="13" font-weight="600" fill="var(--bad)">Нет</text>
+          <text x="618" y="83" font-size="13" font-weight="600" fill="var(--good)">Да</text>
+
+          <rect x="1" y="116" width="398" height="122" rx="11" fill="var(--warn-soft)" stroke="var(--warn-line)"/>
+          <text x="24" y="146" font-size="14.5" font-weight="650" fill="var(--warn)">Не бросайтесь строить ФБС за неделю</text>
+          <text x="24" y="171" font-size="13.5" fill="currentColor" opacity=".75">Отгрузитесь по ФБО в безопасные направления:</text>
+          <text x="24" y="191" font-size="13.5" fill="currentColor" opacity=".75">Беларусь, Астана, дальние кластеры.</text>
+          <text x="24" y="215" font-size="13.5" fill="currentColor" opacity=".75">Следующие месяц-два спокойно выстраивайте</text>
+          <text x="24" y="228" font-size="13.5" fill="currentColor" opacity=".75">процесс ФБС — там много подводных камней.</text>
+
+          <rect x="501" y="116" width="398" height="122" rx="11" fill="var(--good-soft)" stroke="var(--good-line)"/>
+          <text x="524" y="146" font-size="14.5" font-weight="650" fill="var(--good)">Не дублируйте направления зря</text>
+          <text x="524" y="171" font-size="13.5" fill="currentColor" opacity=".75">Если ФБС в Москве работает, он, скорее всего,</text>
+          <text x="524" y="191" font-size="13.5" fill="currentColor" opacity=".75">перекрывает всё, что закрывала бы Беларусь.</text>
+          <text x="524" y="215" font-size="13.5" fill="currentColor" opacity=".75">Беларусь остаётся как подстраховка на случай</text>
+          <text x="524" y="228" font-size="13.5" fill="currentColor" opacity=".75">сложностей с московским ФБС.</text>
+
+          <g stroke="currentColor" stroke-opacity=".4" fill="none" marker-end="url(#ar4)">
+            <path d="M200 242 L 200 268 L 430 268 L 430 292"/>
+            <path d="M700 242 L 700 268 L 470 268 L 470 292"/>
+          </g>
+
+          <rect x="120" y="296" width="660" height="80" rx="11" fill="var(--surface-2)" stroke="currentColor" stroke-opacity=".18"/>
+          <text x="450" y="325" text-anchor="middle" font-size="14.5" font-weight="650" fill="currentColor">В обоих случаях ФБО не бросаем</text>
+          <text x="450" y="349" text-anchor="middle" font-size="13.5" fill="currentColor" opacity=".75">по коробке на каждый склад, чтобы реклама продолжала работать адекватно,</text>
+          <text x="450" y="367" text-anchor="middle" font-size="13.5" fill="currentColor" opacity=".75">и частая сверка остатков вместо поставок «на 7 дней потребности»</text>
+        </svg>
+      </div>
+      <figcaption>Логика простая: минимизируем объём, лежащий в одной точке, но не выпадаем из выдачи и из рекламы.</figcaption>
+    </figure>
+
+    <h3>Конкретные рекомендации из эфира</h3>
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag">Крупным селлерам</span>
+        <p>
+          Комплект ФБС-складов, к которому стоит стремиться: <strong>Москва + Санкт-Петербург + Казань или Екатеринбург</strong>,
+          дальше что-то на юге. Начать реалистично с двух-трёх точек.
+        </p>
+      </div>
+      <div class="card warn-c">
+        <span class="tag">Юг</span>
+        <p>
+          Пока проблемное направление. Дело не в том, что фулфилмент не откроют, — товар физически трудно сдать:
+          не хватает сортировочных центров, огромные очереди. Пример: в Оренбург сдать на СЦ и ПВЗ формально можно,
+          фактически из-за очередей — почти нет.
+        </p>
+      </div>
+      <div class="card">
+        <span class="tag">Несколько складов в одном городе</span>
+        <p>
+          Можно открыть несколько ФБС-складов, например по Москве, и отгружать с одного — так вы присутствуете
+          сразу в нескольких точках. Учтите: возвраты придут на тот склад, который указан по наличию стока,
+          и собирать их придётся отдельно.
+        </p>
+      </div>
+      <div class="card bad-c">
+        <span class="tag">Дешёвые товары</span>
+        <p>
+          На ФБС экономика дешёвого товара не сходится: обработка одного заказа на фулфилменте стоит порядка 50 ₽,
+          и этого хватает, чтобы съесть маржу. Рабочий вариант — оставить такие позиции на ФБО в безопасных
+          и дальних направлениях, предварительно проверив тарифы логистики от кластера хранения в кластер назначения.
+        </p>
+      </div>
+    </div>
+
+    <div class="note acc">
+      <div class="h">Сгорел склад в регионе — бежать открывать там ФБС?</div>
+      <p>
+        Скорее нет. Живой пример из эфира: продавец создал ФБС-склад в Оренбурге — и срок доставки
+        из Оренбурга в Оренбург улучшился лишь на день по сравнению с отгрузкой с ФБО в соседней Уфе.
+        Причина в том, что при разрушении основного логистического хаба сроки растут во всём кластере,
+        даже если сортировочный центр там остался. Открытие ФБС в дальних регионах — это подготовка на случай,
+        если ФБО-склады выгорят массово по нескольким кластерам сразу. Вот тогда ваш склад посреди региона будет очень дорого стоить.
+      </p>
+    </div>
+
+    <div class="note">
+      <div class="h">Про переброски ПВЗ → ПВЗ</div>
+      <p>
+        По разговорам с владельцами пунктов выдачи: механики переработки внутри ПВЗ нет ни физически, ни программно —
+        отправления просто ставят в место отправления, водитель их забирает. Обсуждается вариант с выделенными
+        площадками под такие переброски, но пока это только разговоры. Не стройте на этом планы.
+      </p>
+    </div>
+
+    <div class="note warn">
+      <div class="h">Открытые вопросы, на которые в эфире честно не дали точного ответа</div>
+      <ul>
+        <li><strong>Стат-форма при отгрузке ФБО в Беларусь и Казахстан.</strong> Спикеры сходятся на том, что сам факт перемещения товара обязывает её подать (и при обратном перемещении тоже), но прямо сказали, что на истину не претендуют — нужен профильный эксперт.</li>
+        <li><strong>Честный знак в Беларуси.</strong> Есть сложность: нужно загружать УПД до отгрузки, а Ozon при этом считает товар немаркируемым, хотя в карточке галка стоит. Поддержка на момент эфира искала решение.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="dengi">
+  <div class="wrap">
+    <div class="sec-num">08</div>
+    <h2>Деньги: тарифы, возвраты, страховка</h2>
+    <p class="sub">Цифры, которые проще узнать сейчас, чем в отчёте через месяц.</p>
+
+    <h3>Хранение возвратов на ПВЗ дороже, чем на ФБО</h3>
+    <p>
+      Распространённое заблуждение — что на возвраты по ФБС распространяются тарифы ФБО. Нет,
+      на пунктах выдачи они заметно выше.
+    </p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Что</th><th>Тариф</th><th>Когда применяется</th></tr></thead>
+        <tbody>
+          <tr><td>Хранение товара объёмом до 5 л</td><td class="num">12 ₽ / день</td><td>С учётом применимого НДС, за единицу товара в день</td></tr>
+          <tr><td>Каждый дополнительный литр свыше 5 л</td><td class="num">+3 ₽ / день</td><td>Но не более 500 ₽ в день на отправление</td></tr>
+          <tr><td>Период платного хранения</td><td class="num">2–10 день</td><td>Первый день бесплатный</td></tr>
+          <tr><td>Утилизация</td><td class="num">75 ₽ / кг</td><td>С одиннадцатого дня товар уезжает на платную утилизацию</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">Тарифы названы в эфире по состоянию на 27 августа 2026 — перед расчётами проверьте актуальные значения в кабинете.</p>
+
+    <div class="note warn">
+      <div class="h">Обязательно выставьте минимальную стоимость возврата товара</div>
+      <p>
+        Для дешёвых позиций обратная логистика съедает всё. Часто выгоднее оставить товар покупателю,
+        чем везти его обратно и платить за хранение. Это настройка, а не философия — сделайте её до того,
+        как поедут первые возвраты.
+      </p>
+    </div>
+
+    <h3>Страховка Ozon: считать, а не подключать на автомате</h3>
+    <p>
+      Разбор Ирины: она посчитала компенсацию по своей себестоимости — с учётом НДС и 22% —
+      и на большинстве кабинетов страховка не окупается. То есть на выходе получаются «фантики»,
+      а платить нужно ежедневно и за все склады.
+    </p>
+    <div class="grid g2">
+      <div class="card">
+        <h4>Как считается компенсация</h4>
+        <p>
+          От средней цены товара в продажах за последние 7 дней. Если продаж за 7 дней не было — берут 28 дней,
+          если и там нет — 90. Платите вы при этом ежедневный процент от цены до соинвеста, а получаете усреднённое значение.
+        </p>
+      </div>
+      <div class="card bad-c">
+        <span class="tag">Ловушка</span>
+        <h4>Новинки без истории продаж</h4>
+        <p>
+          Если истории за 90 дней нет, вас сравнивают с конкурентами по похожим товарам.
+          А конкуренты сейчас сливают остатки в ноль, в том числе через региональные акции.
+          В итоге компенсацию посчитают по бросовой цене.
+        </p>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="h">Отдельный аргумент — про самих страховщиков</div>
+      <p>
+        Капитализация страховщика — порядка 90–112 млрд ₽. Этого не хватит на выплату даже по одному крупному складу.
+        При этом с 2022 года мировые перестраховочные общества для российского рынка не работают, крупных
+        внутренних перестраховщиков единицы, и <strong>военные риски они официально не принимают</strong>, а удары БПЛА —
+        это именно военные риски. Как страховой продукт вообще был собран в такой конфигурации, спикерам непонятно.
+      </p>
+      <p>
+        Отдельная история из практики: страховку отключали вручную, а затем она включилась автоматически.
+        Вывод простой — зафиксируйте скриншотом любое своё действие по подключению или отключению.
+      </p>
+    </div>
+
+    <div class="note good">
+      <div class="h">Стоит ли вообще продолжать ФБО</div>
+      <p>
+        Однозначно да. Позиция обоих ведущих: ФБО не теряет актуальности, просто меняется способ им пользоваться —
+        мелкие партии, много складов, частая сверка, минимальный объём в одной точке.
+        Блок планирования поставок при этом становится не менее, а более важным: людям приходится считать чаще и точнее.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="instrumenty">
+  <div class="wrap">
+    <div class="sec-num">09</div>
+    <h2>Инструменты, о которых говорили</h2>
+    <p class="sub">
+      Без ссылок: в записи эфира они не прозвучали в пригодном для цитирования виде.
+      Ищите по названиям либо запросите материалы у организатора эфира.
+    </p>
+
+    <h3>Бесплатный ФБС-модуль сервиса аналитики</h3>
+    <p>
+      Открыт отдельной вкладкой, работает независимо от подписок: нужна только регистрация и подключение API,
+      без привязки карты и тестовых периодов. Заявлен бесплатным как минимум до конца ноября.
+    </p>
+    <div class="grid g2">
+      <div class="card good-c">
+        <span class="tag">Работает сейчас</span>
+        <ul>
+          <li>Свои склады и закупки: загрузка остатков из Excel в один клик, произвольное количество складов.</li>
+          <li>Сопоставление своего склада со складом ФБС на Ozon и на WB — остатки едут сразу на обе площадки.</li>
+          <li>Подгрузка заказов каждые 15 минут с резервированием остатка и обратным обновлением на площадке.</li>
+          <li>Автоматическое списание при отгрузке — вручную ничего вносить не нужно.</li>
+          <li>Дашборд по статусам заказов и полный список заказов ФБС за любые даты.</li>
+          <li>Отдельный бесплатный раздел учёта потерь: ежедневные срезы остатков по складам, кластерам и себестоимости.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag">Обещано в ближайшие недели</span>
+        <ul>
+          <li>Печать сборочных заданий и штрихкодов, а следом — печать кизов в паре с номером заказа.</li>
+          <li>Интеграция с честным знаком: автоматический ввод, вывод и возврат кодов в оборот.</li>
+          <li>Загрузка остатков по API, из «Моего склада» и 1С — вместо ручного Excel.</li>
+          <li>Яндекс Маркет — примерно через две недели после эфира.</li>
+          <li>Отдельные финотчёты по ФБС и разделение P&L на ФБС / ФБО / всё вместе.</li>
+          <li>Прогноз подсорта на ФБС-склады и микс ФБО + ФБС в одном расчёте.</li>
+          <li>Аналитика по времени в статусах и штрафам за позднюю отгрузку.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note acc">
+      <div class="h">Зачем нужен прогноз подсорта именно на ФБС</div>
+      <p>
+        Чтобы посчитать поставку на ФБО-склад, нужно знать, какие кластеры он закрывает: например, Новосибирск
+        закрывает себя, Дальний Восток и Омск, а Екатеринбург — Пермь, Тюмень и Уфу. Для ФБС такой карты пока нет ни у кого:
+        приоритет отгрузки зависит от скорости, а не от географии. Строить её собираются на статистике —
+        смотреть по всем пользователям, какие регионы фактически закрывал ФБС-склад из конкретного города,
+        когда товар одновременно лежал на ФБО в другом кластере.
+      </p>
+    </div>
+
+    <h3>Бесплатный файл аналитики для миграции на Ozon</h3>
+    <p>Открытый файл, который упоминали в эфире и обещали приложить к записи. Что внутри:</p>
+    <ul>
+      <li>Сравнение экономики по категориям — с учётом соинвеста и без, средние комиссии.</li>
+      <li>Средние конверсии по всем категориям: CTR, клик → корзина, корзина → заказ, клик → заказ.</li>
+      <li>Стоимость корзины и заказа по видам рекламных кампаний и стратегиям.</li>
+      <li>Сравнение выручки категорий на Ozon и WB за 52 недели — оценить объём рынка при переходе.</li>
+      <li>Средняя выкупаемость по каждому предмету — для расчёта юнит-экономики.</li>
+      <li>Как пожары сказались на WB, по каждому предмету отдельно.</li>
+      <li>Соинвест на Ozon по дням.</li>
+      <li>Скорость доставки ФБО и ФБС по парам кластеров и логистическое плечо возвратов.</li>
+    </ul>
+
+    <h3>Программы для работы с кизами</h3>
+    <p>
+      Если товароучёт ведётся в 1С или «Моём складе», отчёты о продажах обрабатываются там.
+      Если учёта нет — в эфире назвали специализированные программы по маркировке (Марк-знак, Лен Марк, Шуз Марк).
+      Одна из них, будучи авторизованным партнёром WB, уже забирает данные о продажах по API и готовит документы
+      на вывод и возврат кодов в оборот — вам остаётся подписать их своей ЭЦП. Для Ozon аналогичное решение делалось
+      в момент эфира и обещано к 1 октября.
+    </p>
+    <p>
+      По вопросам честного знака Дмитрий Егоров ведёт телеграм-канал (искать по имени и слову «киз»);
+      там же разобраны перемаркировка и тема 1 октября.
+    </p>
+  </div>
+</section>
+
+<section id="cheklist">
+  <div class="wrap">
+    <div class="sec-num">10</div>
+    <h2>Чек-лист: что сделать на этой неделе</h2>
+    <p class="sub">Собрано из рекомендаций всех трёх спикеров.</p>
+    <ul class="check">
+      <li><div><b>Пересчитать юнит-экономику под ФБС</b><span>Заложить падение выкупаемости примерно на 5 п.п. и вызванный этим рост ДР. Проверить, какие позиции после этого вообще имеют смысл на ФБС.</span></div></li>
+      <li><div><b>Разделить ассортимент на «едет по ФБС» и «остаётся на ФБО»</b><span>Дешёвые позиции с обработкой около 50 ₽ за заказ на ФБС не выживают — им место в безопасных ФБО-направлениях.</span></div></li>
+      <li><div><b>Съездить на фулфилмент физически</b><span>Посмотреть на стеллажи, адресное хранение и людей. Зафиксировать тарифы письменно и держать в голове, что их всё равно могут поднять.</span></div></li>
+      <li><div><b>Решить, как вы храните пары «номер заказа ↔ киз»</b><span>Excel, ВМС фулфилмента, товароучёт или сервис. Без этого возвраты на ФБО становятся неразрешимой проблемой.</span></div></li>
+      <li><div><b>Определиться со схемой возвратов</b><span>Автовозврат в свой ПВЗ сильно упрощает работу с кизами. Возврат на ФБО требует полноценной базы пар.</span></div></li>
+      <li><div><b>Вывести GTIN на этикетку для новых партий</b><span>Текстом, без штрихкода. Ничего уже наклеенного не переклеивать и баркоды не менять до официальных разъяснений.</span></div></li>
+      <li><div><b>Выставить минимальную стоимость возврата товара</b><span>Иначе обратная логистика съест маржу на дешёвых позициях.</span></div></li>
+      <li><div><b>Посчитать страховку на своих цифрах</b><span>По своей себестоимости с учётом НДС и налогов, а не по ощущению «пусть будет».</span></div></li>
+      <li><div><b>Не бросать ФБО</b><span>По коробке на склад, чаще сверяться, меньше объёма в одной точке. Реклама должна продолжать работать.</span></div></li>
+      <li><div><b>Заложить сроки на запуск</b><span>Размещение на фулфилменте — 4–5 дней, выстраивание процесса — месяц-два. Если начинаете сейчас, к сезону вы успеваете, но без запаса.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="slovar">
+  <div class="wrap">
+    <div class="sec-num">11</div>
+    <h2>Словарь</h2>
+    <p class="sub">Термины, которые в эфире звучат как само собой разумеющиеся.</p>
+    <dl class="gloss">
+      <dt>ФБО (FBO)</dt><dd>Продажа со склада маркетплейса: вы привозите партию, площадка хранит, собирает и доставляет.</dd>
+      <dt>ФБС (FBS)</dt><dd>Продажа со своего склада: маркетплейс передаёт заказ, вы собираете и отгружаете на его сортировочный центр или пункт выдачи.</dd>
+      <dt>Киз</dt><dd>Код идентификации, он же код маркировки — уникальный код на единице товара в системе «Честный знак».</dd>
+      <dt>GTIN (джитин)</dt><dd>Global Trade Item Number — глобальный номер товара, который выдаёт ассоциация GS1. Внутри кода маркировки находится между (01) и (21).</dd>
+      <dt>029 и 046</dt><dd>Начало кода товара. 046 — «настоящий» GTIN от GS1 Rus (платное членство). 029 — код, который генерирует сам честный знак для техкарточек и маркировки остатков: бесплатный, но не уникальный.</dd>
+      <dt>ГИС МТ</dt><dd>Государственная информационная система мониторинга товаров — база честного знака, по которой идут проверки.</dd>
+      <dt>ЦРП</dt><dd>Центр развития перспективных технологий — оператор системы маркировки; через него задают официальные вопросы площадкам.</dd>
+      <dt>Перемаркировка</dt><dd>Выпуск нового кода маркировки взамен утраченного, с указанием прежнего кода. Нужна, когда товар вернулся без упаковки и без киза.</dd>
+      <dt>Обезличка</dt><dd>Товар без опознавательных данных, который площадка отправляет продавцу за его счёт — в том числе если код маркировки оказался не в обороте.</dd>
+      <dt>ВМС (WMS)</dt><dd>Система управления складом: адреса хранения, приёмка, сборка, остатки. У каждого фулфилмента своя и, как правило, несовместимая с чужой.</dd>
+      <dt>СЦ / ПВЗ</dt><dd>Сортировочный центр и пункт выдачи заказов — точки, куда вы сдаёте отгрузку по ФБС и куда приходят возвраты.</dd>
+      <dt>Соинвест (СПП)</dt><dd>Скидка, которую маркетплейс доплачивает за свой счёт, снижая цену для покупателя.</dd>
+      <dt>ДР</dt><dd>Доля рекламных расходов — отношение расходов на рекламу к выручке. Считается с учётом выкупа, поэтому падение выкупаемости автоматически ухудшает ДР.</dd>
+      <dt>Подсорт</dt><dd>Дозагрузка товара на склад по расчёту потребности, чтобы не выпасть из наличия.</dd>
+      <dt>Стат-форма</dt><dd>Статистическая форма учёта перемещения товаров, подаётся в таможню при отгрузке в страны ЕАЭС.</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Об источнике.</strong> Материал собран по расшифровке записи Zoom-эфира от 27 августа 2026 года.
+    Спикеры названы так, как они представлены в эфире. Прямые цитаты приведены с минимальной редактурой устной речи.</p>
+    <p><strong>Про цифры.</strong> Статистика по выкупаемости, срокам доставки и соинвесту — это агрегированные данные
+    одного сервиса аналитики по своим пользователям на конец августа 2026 года. Тарифы, комиссии и условия страхования
+    меняются: перед решениями сверяйтесь с кабинетом и актуальными документами площадки.</p>
+    <p><strong>Про честный знак.</strong> Раздел отражает позицию приглашённого эксперта, включая его прямо
+    названное «удобное нарушение» при выводе кодов из оборота. Это не юридическая консультация и не рекомендация
+    нарушать требования — решение о своей схеме работы принимаете вы.</p>
+    <hr class="soft">
+    <p>Конспект подготовлен для внутреннего использования. Сентябрь 2026.</p>
+  </div>
+</footer>
+
+</body>
+</html>
